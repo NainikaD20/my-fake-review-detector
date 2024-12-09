@@ -1,22 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [review, setReview] = useState("");
+  const [analysisResult, setAnalysisResult] = useState("");
+
+  const handleInputChange = (event) => {
+    setReview(event.target.value);
+  };
+
+  const analyzeReview = () => {
+    if (review.trim() === "") {
+      setAnalysisResult("Please enter a review to analyze.");
+    } else {
+      // Simulating the result for now
+      setAnalysisResult("This review seems genuine!");
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Fake Review Detector</h1>
+        <textarea
+          placeholder="Enter a review here..."
+          value={review}
+          onChange={handleInputChange}
+          rows="5"
+          cols="40"
+        />
+        <br />
+        <button onClick={analyzeReview}>Analyze Review</button>
+        <p>{analysisResult}</p>
       </header>
     </div>
   );
