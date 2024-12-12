@@ -1,38 +1,40 @@
 import React, { useState } from "react";
-import "./App.css";
 
 function App() {
   const [review, setReview] = useState("");
-  const [analysisResult, setAnalysisResult] = useState("");
+  const [prediction, setPrediction] = useState("");
 
-  const handleInputChange = (event) => {
-    setReview(event.target.value);
+  const handleInputChange = (e) => {
+    setReview(e.target.value);
   };
 
-  const analyzeReview = () => {
-    if (review.trim() === "") {
-      setAnalysisResult("Please enter a review to analyze.");
-    } else {
-      // Simulating the result for now
-      setAnalysisResult("This review seems genuine!");
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Send review to the Flask API
+    const response = await fetch("http://127.0.0.1:5000/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ review })
+    });
+
+    const data = await response.json();
+    setPrediction(data.prediction); // Update prediction state with result
   };
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Fake Review Detector</h1>
+      <h1>Fake Review Detector</h1>
+      <form onSubmit={handleSubmit}>
         <textarea
-          placeholder="Enter a review here..."
           value={review}
           onChange={handleInputChange}
+          placeholder="Enter your review here"
           rows="5"
-          cols="40"
         />
-        <br />
-        <button onClick={analyzeReview}>Analyze Review</button>
-        <p>{analysisResult}</p>
-      </header>
+        <button type="submit">Submit</button>
+      </form>
+      <p>Prediction: {prediction}</p>
     </div>
   );
 }
