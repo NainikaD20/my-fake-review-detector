@@ -2,3 +2,10 @@ Flask==2.2.2
 # Optional: For handling CORS (Cross-Origin Resource Sharing)
 Flask-Cors==4.0.0
 Werkzeug==2.2.2
+Flask
+pandas
+numpy
+scikit-learn
+nltk
+matplotlib
+seaborn
