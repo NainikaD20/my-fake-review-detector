@@ -27,4 +27,4 @@ print(classification_report(y_test, y_pred))
 with open('model.pkl', 'wb') as f:
     pickle.dump(model, f)
 
-print("Model training complete and saved.")
+print("Model training complete and saved.") 
