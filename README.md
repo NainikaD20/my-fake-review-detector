@@ -102,9 +102,8 @@ This will output a trained model file (`model.pkl`) and transformers (`bow_trans
 - **Response**: A JSON object containing the prediction and probabilities.
 - 
 ### Screenshots
-(./Screenshot (82).png)
-(./Screenshot (83).png)
-
+![Screenshot 1](./images/Screenshot%20(82).png)
+![Screenshot 2](./images/Screenshot%20(83).png)
 ### Features
 - **Prediction**: Classifies reviews as fake or real.
 - **Probability Scores**: Provides the probability that a review is fake or real.
