@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# Fake Review Detector
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a machine learning-based application designed to detect fake and computer generated reviews in text data. By leveraging natural language processing (NLP) techniques, the system analyzes text reviews and predicts whether they are fake or real. The application uses a logistic regression model, trained on a dataset of reviews, along with text preprocessing techniques like TF-IDF (Term Frequency-Inverse Document Frequency) to process the text data.
 
-## Available Scripts
+The app exposes a Flask-based API that accepts review text and returns predictions about its authenticity.
 
-In the project directory, you can run:
+## Table of Contents
+- [Overview](#overview)
+- [Technologies Used](#technologies-used)
+- [Installation Instructions](#installation-instructions)
+- [Usage](#usage)
+  - [API Usage](#api-usage)
+  - [Front-End Usage](#front-end-usage)
+- [Model Training](#model-training)
+- [API Endpoints](#api-endpoints)
+- [Features](#features)
+- [Contributing](#contributing)
 
-### `npm start`
+## Overview
+The Fake Review Detector application is a web-based service that predicts whether a review is "fake" or "real". The system involves the following components:
+- **Data Preprocessing**: Converts the review text to lowercase and applies TF-IDF to transform it into numerical features.
+- **Model Training**: A logistic regression model is trained on the preprocessed data to classify reviews.
+- **Flask API**: A Flask-based API allows users to submit review text and get predictions on whether the review is fake or real.
+- **Front-End**: A user-friendly interface built with HTML/CSS for easy interaction with the app.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
+- Python
+- Flask (for the web API)
+- scikit-learn (for machine learning models)
+- pandas (for data manipulation)
+- NumPy (for numerical operations)
+- SciPy (for sparse matrix handling)
+- Pickle (for saving and loading the model and transformers)
+- Flask-CORS (for enabling CORS in the API)
+- HTML/CSS (for the front-end)
+- Jupyter Notebooks (for exploratory data analysis)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation Instructions
+To run the project locally, follow these steps:
 
-### `npm test`
+1. **Clone the repository**:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    ```bash
+    git clone https://github.com/NainikaD20/my-fake-review-detector.git
+    cd my-fake-review-detector
+    ```
 
-### `npm run build`
+2. **Set up a virtual environment (optional but recommended)**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use 'venv\Scripts\activate'
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Install dependencies**:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-### `npm run eject`
+4. **Run the Flask application**:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    ```bash
+    python app.py
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    The API will run on your localhost.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### API Usage
+The following API endpoint allows you to send reviews and get predictions:
 
-## Learn More
+- **POST /predict**: Accepts a POST request with a JSON payload containing the review text and returns the prediction (fake or real) along with probabilities.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Front-End Usage
+If you're using the front-end, follow these steps:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Open the app in your browser.
+2. Enter a review in the text box and click "Submit."
+3. View the results below, including the prediction and probabilities.
 
-### Code Splitting
+### Model Training
+The model training process involves the following steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Loading the dataset**: The dataset is loaded and cleaned (missing values removed, text converted to lowercase).
+2. **Text Vectorization**: Use `CountVectorizer` and `TfidfTransformer` to convert review text into numerical features.
+3. **Model Training**: Train a `LogisticRegression` model using the preprocessed data.
+4. **Saving the model**: The trained model and transformers are saved using pickle.
 
-### Analyzing the Bundle Size
+To train the model, run:
+python train_model.py
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This will output a trained model file (`model.pkl`) and transformers (`bow_transformer.pkl`, `tfidf_transformer.pkl`), which can be used for later predictions.
 
-### Making a Progressive Web App
+### API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### `/predict`
+- **Method**: POST
+- **Request**: A JSON object containing the review text (key: "text").
+- **Response**: A JSON object containing the prediction and probabilities.
 
-### Advanced Configuration
+### Features
+- **Prediction**: Classifies reviews as fake or real.
+- **Probability Scores**: Provides the probability that a review is fake or real.
+- **CORS Enabled**: Supports cross-origin requests, enabling easy interaction with web applications.
+- **Easy to Deploy**: The app can be easily deployed to any server or cloud service for production use.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Contributing
+To contribute to the project:
 
-### Deployment
+1. Fork the repository.
+2. Create a new branch for your changes (`git checkout -b feature-branch`).
+3. Make your changes and commit them (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature-branch`).
+5. Open a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
