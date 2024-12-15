@@ -14,6 +14,7 @@ The app exposes a Flask-based API that accepts review text and returns predictio
 - [Model Training](#model-training)
 - [API Endpoints](#api-endpoints)
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Contributing](#contributing)
 
 ## Overview
@@ -99,6 +100,10 @@ This will output a trained model file (`model.pkl`) and transformers (`bow_trans
 - **Method**: POST
 - **Request**: A JSON object containing the review text (key: "text").
 - **Response**: A JSON object containing the prediction and probabilities.
+- 
+### Screenshots
+(./Screenshot (82).png)
+(./Screenshot (83).png)
 
 ### Features
 - **Prediction**: Classifies reviews as fake or real.
