@@ -33,8 +33,7 @@ The Fake Review Detector application is a web-based service that predicts whethe
 - SciPy (for sparse matrix handling)
 - Pickle (for saving and loading the model and transformers)
 - Flask-CORS (for enabling CORS in the API)
-- HTML/CSS (for the front-end)
-- Jupyter Notebooks (for exploratory data analysis)
+- React (for the front-end)
 
 ## Installation Instructions
 To run the project locally, follow these steps:
